@@ -21,97 +21,59 @@ client.once("ready", () => {
   console.log("Nix-bot is online!");
 });
 
-// this is for test purpose
-// client.on("message", (message) => {
-//   if (message.content.includes("468694108945383434")) {
-//     message.channel.send("Nixon is currently not available");
-//   }
-// });
-
 client.on("message", (message) => {
   let args = message.content.substring(prefix.length + 1).split(" ");
 
   let author = message.author.username;
 
   if (message.content.includes("468694108945383434")) {
-    message.channel.send("Onii-chan is currently not available");
+    // message.channel.send("Onii-chan is currently not available");
+    // console.log(message.content);
+    client.users
+      .fetch("468694108945383434")
+      .then((user) =>
+        user.send(
+          `Onii-chan\n${
+            message.author.username
+          } tagged you and said: ${message.content.replace(
+            "<@!468694108945383434>",
+            "@Nixon"
+          )}\nChannel name: ${message.channel}`
+        )
+      );
   }
-  if (message.content.includes("684683991936532492")) {
-    message.channel.send("Baka   is currently not available");
+  if (message.content.includes("sed")) {
+    message.channel.send(`Very sad ${message.author}`);
   }
+  // if (message.content.includes("684683991936532492")) {809295234848260127
+  //   message.channel.send("Baka   is currently not available"); 684675121000218637
+  // }
+  if (message.author.id === "432587314221416468") {
+    message.channel.send("Chup Bilkul Chup!");
+  }
+  // if (
+  //   message.author.id === "468694108945383434" &&
+  //   message.channel.id === "809295234848260127"
+  // ) {
+  //   message.channel.send(
+  //     message.content.replace("-", " ") + `\n-${message.author.username}`
+  //   );
+  // }
+
+  const philoChannel = client.channels.cache.find(
+    (channel) => channel.id === "809295234848260127"
+  );
+
   switch (args[0]) {
     case "help":
-      // to use embed > add RichEmbed on the first line of code const {Client,RichEmbed} = require(Discord.js);
-      const embed = new Discord.MessageEmbed()
-        .setColor("#0099ff")
-        .setTitle(
-          `${author}`,
-          `${message.author.displayAvatarURL({
-            format: "png",
-            dynamic: true,
-          })}`
-        )
-        .setAuthor("Henlo")
-        .setDescription("pp bot is a fun bot")
-        .setThumbnail(
-          "https://cdn.discordapp.com/avatars/468694108945383434/a_c52d212378f8073e7bb5aae3f042c7e8.gif"
-        )
-        .addFields(
-          {
-            name: "Still Under development!",
-            value: "\u200B",
-          },
-          { name: "Following are the commands:", value: "\u200B" },
-          {
-            name: "pp hi ",
-            value: "Greetings",
-            inline: true,
-          },
-          {
-            name: "pp avatar",
-            value: "Display user avatar",
-            inline: true,
-          },
-          { name: "\u200B", value: "\u200B" },
-          {
-            name: "pp ping",
-            value: "Pongs back!",
-            inline: true,
-          },
-          {
-            name: "pp beep",
-            value: "Boops back!",
-            inline: true,
-          },
-          { name: "\u200B", value: "\u200B" }
-        )
-        .addField(
-          `Hope you got the commands ${message.author.username}`,
-          "Have fun!!"
-        )
-        .setImage(
-          "https://www.elyrsps.net/forums/uploads/monthly_2021_03/image0.thumb.gif.0b892035b2937c2572355a72f222171c.gif"
-        )
-        .setTimestamp()
-        .setFooter(
-          "pp-bot",
-          "https://pa1.narvii.com/6831/2b060dd90cd5ddbf28111304ac9b0c9b81fda044_128.gif"
-        );
-
-      message.author.send(embed);
-
-      // message.author.send(
-      //   `Hello ${author}, this is Nix-bot.\nTo use commands add prefix - pp and the command.\nFor eg. pp hi.\nThe commands are hi,avatar,ping,beep`
-      // );
+      client.commands.get("help").execute(message, args);
       break;
 
+    case "meme":
+      client.commands.get("meme").execute(message, args);
+      break;
     case "avatar":
-      message.channel.send(
-        `Your avatar: ${message.author.displayAvatarURL({
-          format: "png",
-          dynamic: true,
-        })}`
-      );
+      client.commands.get("avatar").execute(message, args);
       break;
 
     case "hi":
@@ -129,9 +91,40 @@ client.on("message", (message) => {
     case "youtube":
       client.commands.get("youtube").execute(message, args);
       break;
+
+    case "robo":
+      client.commands.get("robo").execute(message, args);
+      break;
+    case "count":
+      message.channel.send(`There are ${message.guild.memberCount} members.`);
+      break;
+    case "philosophy":
+      client.commands.get("philosophy").execute(message, args, philoChannel);
+      break;
+    case "slap":
+      let [argslap, name] = args;
+      const user_id = name.slice(3, name.length - 1);
+      const foundUser = client.users.cache.find((user) => user.id === user_id);
+      client.commands.get("slap").execute(message, args, foundUser.id);
+      break;
+    case "quote":
+      if (message.channel.id === philoChannel.id) {
+        client.commands.get("quote").execute(message, args, philoChannel);
+        message.delete();
+      } else {
+        message.channel.send(
+          "This command will work in philosophy channel Baka."
+        );
+      }
+      break;
+    case "delete":
+      message.delete();
+      message.channel.send("Hehe command got deleted");
+      break;
   }
 });
 
+// https://robohash.org/
 // Basic method to create custom commands
 // client.on("message", (message) => {
 //   if (!message.content.startsWith(prefix) || message.author.bot) return;
