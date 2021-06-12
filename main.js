@@ -37,7 +37,7 @@ client.on("message", (message) => {
             message.author.username
           } tagged you and said: ${message.content.replace(
             "<@!468694108945383434>",
-            "@Nixon"
+            "[Nixon]"
           )}\nChannel name: ${message.channel}`
         )
       );
