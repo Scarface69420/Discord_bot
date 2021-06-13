@@ -29,6 +29,11 @@ module.exports = {
           inline: true,
         },
         {
+          name: "pp count",
+          value: "Displays members in the server.",
+          inline: true,
+        },
+        {
           name: "pp avatar",
           value: "Display user avatar",
           inline: true,
@@ -40,6 +45,7 @@ module.exports = {
         {
           name: "pp meme",
           value: "Random meme from reddit",
+          inline: true,
         },
         // { name: "\u200B", value: "\u200B" },
         {
@@ -52,10 +58,7 @@ module.exports = {
           value: "Boops back!",
           inline: true,
         },
-        {
-          name: "pp count",
-          value: "Displays members in the server.",
-        },
+
         {
           name: "pp philosophy [text]",
           value: "Will display the [text] in #philosophy channel.",
@@ -63,6 +66,20 @@ module.exports = {
         {
           name: "pp slap @user",
           value: "Will slap the mentioned user.",
+        },
+        {
+          name: "pp quote",
+          value: "Displays random quote.",
+          inline: true,
+        },
+        {
+          name: "pp github [username]",
+          value: "Display user's github Account",
+          inline: true,
+        },
+        {
+          name: "pp pick [comma seperated options]",
+          value: "Will pick any one of the options",
         },
         { name: "\u200B", value: "\u200B" }
       )

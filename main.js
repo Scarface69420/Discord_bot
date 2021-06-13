@@ -43,21 +43,16 @@ client.on("message", (message) => {
       );
   }
   if (message.content.includes("sed")) {
-    message.channel.send(`Very sad ${message.author}`);
+    message.channel.send(`Very sad ${message.author.username}`);
+  }
+  if (message.content.includes("nice")) {
+    message.channel.send(`Yessh very noice ${message.author.username}`);
   }
   // if (message.content.includes("684683991936532492")) {809295234848260127
   //   message.channel.send("Baka   is currently not available"); 684675121000218637
   // }
-  if (message.author.id === "432587314221416468") {
-    message.channel.send("Chup Bilkul Chup!");
-  }
-  // if (
-  //   message.author.id === "468694108945383434" &&
-  //   message.channel.id === "809295234848260127"
-  // ) {
-  //   message.channel.send(
-  //     message.content.replace("-", " ") + `\n-${message.author.username}`
-  //   );
+  // if (message.author.id === "701014865694818354") {
+  //   message.channel.send("Chup Bilkul Chup!");
   // }
 
   const philoChannel = client.channels.cache.find(
@@ -121,25 +116,14 @@ client.on("message", (message) => {
       message.delete();
       message.channel.send("Hehe command got deleted");
       break;
+    case "github":
+      let githubAcc = args[1];
+      client.commands.get("github").execute(message, githubAcc);
+      break;
+    case "pick":
+      client.commands.get("pick").execute(message, args);
+      break;
   }
 });
-
-// https://robohash.org/
-// Basic method to create custom commands
-// client.on("message", (message) => {
-//   if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-//   const args = message.content.slice(prefix.length).split(/ +/); //it is (" ") same as (/ +/)
-//   const command = args.shift().toLowerCase();
-
-//   if (command === "ping") {
-//     client.commands.get("ping").execute(message, args);
-//     // message.channel.send("pong!");
-//   } else if (command == "youtube") {
-//     client.commands.get("youtube").execute(message, args);
-//   } else {
-//     // message.channel.send("This is not a recognized command!");
-//   }
-// });
 
 client.login(process.env.TOKEN);
