@@ -4,7 +4,7 @@ module.exports = {
   description: "this is a help command!",
   execute(message, args) {
     const embed = new MessageEmbed()
-      .setColor("#0099ff")
+      .setColor("RANDOM")
       .setTitle(
         `${message.author.username}`,
         `${message.author.displayAvatarURL({
@@ -41,6 +41,7 @@ module.exports = {
         {
           name: "pp robo",
           value: "Displays a robo picture",
+          inline: true,
         },
         {
           name: "pp meme",
@@ -61,15 +62,18 @@ module.exports = {
 
         {
           name: "pp philosophy [text]",
-          value: "Will display the [text] in #philosophy channel.",
+          value:
+            "Will display the [text] in #🤓-philosophy channel(if you have one).",
+          inline: true,
         },
         {
           name: "pp slap @user",
           value: "Will slap the mentioned user.",
+          inline: true,
         },
         {
           name: "pp quote",
-          value: "Displays random quote.",
+          value: "Displays random quote. Only in a #🤓-philosophy channel.",
           inline: true,
         },
         {
@@ -80,6 +84,22 @@ module.exports = {
         {
           name: "pp pick [comma seperated options]",
           value: "Will pick any one of the options",
+          inline: true,
+        },
+        {
+          name: "pp rps [r,p,s]",
+          value: "Play rock, paper, scissors with the bot!",
+          inline: true,
+        },
+        {
+          name: "pp brick @user",
+          value: "Will brick the mentioned user.",
+          inline: true,
+        },
+        {
+          name: "pp cry",
+          value: "Crying gif.",
+          inline: true,
         },
         { name: "\u200B", value: "\u200B" }
       )

@@ -22,9 +22,9 @@ client.once("ready", () => {
 });
 
 client.on("message", (message) => {
-  let args = message.content.substring(prefix.length + 1).split(" ");
-
   let author = message.author.username;
+
+  if (message.author.bot) return;
 
   if (message.content.includes("468694108945383434")) {
     // message.channel.send("Onii-chan is currently not available");
@@ -45,84 +45,103 @@ client.on("message", (message) => {
   if (message.content.includes("sed")) {
     message.channel.send(`Very sad ${message.author.username}`);
   }
-  if (message.content.includes("nice")) {
-    message.channel.send(`Yessh very noice ${message.author.username}`);
+  if (message.content.includes("throw yourself off a bridge")) {
+    message.channel.send(`Yeet! ${message.author.username}`);
   }
-  // if (message.content.includes("684683991936532492")) {809295234848260127
-  //   message.channel.send("Baka   is currently not available"); 684675121000218637
-  // }
-  // if (message.author.id === "701014865694818354") {
-  //   message.channel.send("Chup Bilkul Chup!");
-  // }
-
+  //  "809295234848260127" - philosophy channel id
   const philoChannel = client.channels.cache.find(
-    (channel) => channel.id === "809295234848260127"
+    (channel) => channel.name === "🤓-philosophy"
   );
 
-  switch (args[0]) {
-    case "help":
-      client.commands.get("help").execute(message, args);
-      break;
+  if (message.content.split(" ")[0] === "pp") {
+    let args = message.content.substring(prefix.length + 1).split(" ");
 
-    case "meme":
-      client.commands.get("meme").execute(message, args);
-      break;
-    case "avatar":
-      client.commands.get("avatar").execute(message, args);
-      break;
+    switch (args[0]) {
+      case "help":
+        client.commands.get("help").execute(message, args);
+        break;
 
-    case "hi":
-      message.channel.send(`Hello ${author}`);
-      break;
+      case "meme":
+        client.commands.get("meme").execute(message, args);
+        break;
+      case "avatar":
+        client.commands.get("avatar").execute(message, args);
+        break;
 
-    case "beep":
-      message.channel.send(`boop!`);
-      break;
+      case "hi":
+        message.channel.send(`Hello ${author}`);
+        break;
 
-    case "ping":
-      client.commands.get("ping").execute(message, args);
-      break;
+      case "beep":
+        message.channel.send(`boop!`);
+        break;
 
-    case "youtube":
-      client.commands.get("youtube").execute(message, args);
-      break;
+      case "ping":
+        client.commands.get("ping").execute(message, args);
+        break;
 
-    case "robo":
-      client.commands.get("robo").execute(message, args);
-      break;
-    case "count":
-      message.channel.send(`There are ${message.guild.memberCount} members.`);
-      break;
-    case "philosophy":
-      client.commands.get("philosophy").execute(message, args, philoChannel);
-      break;
-    case "slap":
-      let [argslap, name] = args;
-      const user_id = name.slice(3, name.length - 1);
-      const foundUser = client.users.cache.find((user) => user.id === user_id);
-      client.commands.get("slap").execute(message, args, foundUser.id);
-      break;
-    case "quote":
-      if (message.channel.id === philoChannel.id) {
-        client.commands.get("quote").execute(message, args, philoChannel);
-        message.delete();
-      } else {
-        message.channel.send(
-          "This command will work in philosophy channel Baka."
+      case "robo":
+        client.commands.get("robo").execute(message, args);
+        break;
+      case "count":
+        message.channel.send(`There are ${message.guild.memberCount} members.`);
+        break;
+      case "philosophy":
+        client.commands.get("philosophy").execute(message, args, philoChannel);
+        break;
+      case "slap":
+        let [argslap, name] = args;
+        const user_id = name.slice(3, name.length - 1);
+        const foundUser = client.users.cache.find(
+          (user) => user.id === user_id
         );
-      }
-      break;
-    case "delete":
-      message.delete();
-      message.channel.send("Hehe command got deleted");
-      break;
-    case "github":
-      let githubAcc = args[1];
-      client.commands.get("github").execute(message, githubAcc);
-      break;
-    case "pick":
-      client.commands.get("pick").execute(message, args);
-      break;
+        client.commands.get("slap").execute(message, args, foundUser.id);
+        break;
+      case "quote":
+        if (message.channel.id === philoChannel.id) {
+          client.commands.get("quote").execute(message, args, philoChannel);
+          message.delete();
+        } else {
+          message.channel.send(
+            "This command will work in philosophy channel Baka."
+          );
+        }
+        break;
+      case "delete":
+        message.delete();
+        message.channel.send("Hehe command got deleted");
+        break;
+      case "github":
+        let githubAcc = args[1];
+        client.commands.get("github").execute(message, githubAcc);
+        break;
+      case "pick":
+        client.commands.get("pick").execute(message, args);
+        break;
+      case "kill":
+        let [argkill, kname] = args;
+        const kuser_id = kname.slice(3, kname.length - 1);
+        const kfoundUser = client.users.cache.find(
+          (user) => user.id === kuser_id
+        );
+        client.commands.get("kill").execute(message, args, kfoundUser.id);
+        break;
+      case "rps":
+        let [rpscommand, rpsoption] = args;
+        client.commands.get("rps").execute(message, rpsoption);
+        break;
+      case "brick":
+        let [argbrick, bname] = args;
+        const buser_id = bname.slice(3, bname.length - 1);
+        const bfoundUser = client.users.cache.find(
+          (user) => user.id === buser_id
+        );
+        client.commands.get("brick").execute(message, args, bfoundUser.id);
+        break;
+      case "cry":
+        client.commands.get("cry").execute(message, args);
+        break;
+    }
   }
 });
 

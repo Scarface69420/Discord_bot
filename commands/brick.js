@@ -2,17 +2,17 @@ const constants = require("../constants.js");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "slap",
-  description: "This is slap command!",
+  name: "brick",
+  description: "This is brick command!",
   execute(message, args, userId) {
     let author = message.guild.member(message.author).displayName;
     let userToBeSlapped = message.guild.member(userId).displayName;
     const embed = new MessageEmbed()
       .setColor("RANDOM")
-      .setTitle(`${author} slaps ${userToBeSlapped}`)
+      .setTitle(`${author} bricked ${userToBeSlapped}`)
       .setImage(
-        constants.slap_array[
-          Math.floor(Math.random() * constants.slap_array.length)
+        constants.brick_array[
+          Math.floor(Math.random() * constants.brick_array.length)
         ]
       );
 
